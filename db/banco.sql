@@ -1,0 +1,6 @@
+CREATE TABLE produtos (
+	id				INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+	cod_barras		INT NOT NULL UNIQUE,
+	produto 		VARCHAR(255) NOT NULL,
+	votos			INT
+)

@@ -5,9 +5,12 @@
 	
 	$cliente = new nusoap_client('http://localhost/Mercadinho/Servidor.php?wsdl');
 
-	$parametros = array('nome'=>'Ruan', 'idade'=>30);
+	//$parametros = array('cod_barras'=>106, 'produto'=>'coca-cola');
 
-	$resultado = $cliente->call('exemplo', $parametros);
+	//$resultado = $cliente->call('cadastra', $parametros);
 
+	$parametros = array('id'=>4);
+
+	$resultado = $cliente->call('lista', $parametros);
 	echo utf8_encode($resultado);
 ?>
