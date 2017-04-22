@@ -1,4 +1,4 @@
 /logs/*
 !/logs/README.md
-composer.json
-composer.lock
+/composer.json
+/composer.lock
