@@ -5,8 +5,24 @@ use \Psr\Http\Message\ResponseInterface as Response;
 require '../vendor/autoload.php';
 
 $app = new \Slim\App;
-$app->get('/getprodutos', 'getProdutos');
-$app->post('/addproduto','addProduto');
+
+//Retorna todos os produtos
+$app->get('/getprodutos', function (){
+	$stmt = getConn()->query("SELECT * FROM produtos");
+	$produtos = $stmt->fetchAll(PDO::FETCH_OBJ);
+	echo json_encode($produtos);
+});
+
+//Cadastra um produto
+$app->post('/addproduto', function ($request, $response, $args){
+	$todosOsParametros = $request->getParsedBody();
+	$cod_barras = $todosOsParametros['cod_barras'];
+	$produto = $todosOsParametros['produto'];
+	$sql = "INSERT INTO produtos (cod_barras, produto) values ('".$cod_barras."','".$produto."')";
+	$conn = getConn();
+	$stmt = $conn->prepare($sql);
+	$stmt->execute();
+});
 $app->run();
 
 function getConn() {
@@ -23,24 +39,24 @@ try{
 }
 }
 
-function getProdutos() {
-	$stmt = getConn()->query("SELECT * FROM produtos");
-	$produtos = $stmt->fetchAll(PDO::FETCH_OBJ);
-	echo json_encode($produtos);
+/*
+//GET
+$allGetVars = $request->getQueryParams();
+foreach($allGetVars as $key => $param){
+   //GET parameters list
 }
 
-function addProduto(){
-	$request = \Slim\Slim::getInstance()->request();
-	$produto = json_decode($request->getBody());
-	$sql = "INSERT INTO produtos(cod_barras, produto) values(:cod_barras,':produto')";
-	$conn = getConn();
-	$stmt = $conn->prepare($sql);
-	$stmt->bindParam("cod_barras",$produto->cod_barras);
-	$stmt->bindParam("produto",$produto->produto);
-	$stmt->execute();
-	$produto->id = $conn->lastInsertId();
-	echo json_encode($produto);
-	
+//POST or PUT
+$allPostPutVars = $request->getParsedBody();
+foreach($allPostPutVars as $key => $param){
+   //POST or PUT parameters list
 }
+Single parameters value:
 
+//Single GET parameter
+$getParam = $allGetVars['title'];
+
+//Single POST/PUT parameter
+$postParam = $allPostPutVars['postParam'];
+*/
 ?>
