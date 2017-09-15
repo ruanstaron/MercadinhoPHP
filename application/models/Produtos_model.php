@@ -14,4 +14,12 @@ class Produtos_model extends CI_Model {
     $query = $this->db->get('produtos');
         return $query->result();
   }
+
+  function getProduto($opcao, $produto){
+    $this->db->order_by($opcao, "asc");
+    $where = $opcao." LIKE '%".$produto."%'";
+    $this->db->where($where);
+    $query = $this->db->get('produtos');
+        return $query->result();
+  }
 }

@@ -1,5 +1,5 @@
 html, body{
-  background-color: #9ef998;
+  background-color: #ffd78d;
 }
 
 h1{
@@ -32,7 +32,7 @@ h1{
 }
 
 .title .highlight {
-  color: #eebf3f;
+  color: #ffa500;
 }
 
 #txtBusca{
@@ -42,7 +42,7 @@ h1{
   font-size:18px;
   border:none;
   height:30px;
-  width:412px;
+  width:281px;
 }
 
 #btnBusca{
@@ -64,4 +64,10 @@ h1{
 .table{
   width: 800px;
   margin: 0 auto;
+}
+
+#select{
+  float: left;
+  border:none;
+  height:28px;
 }
